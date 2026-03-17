@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2026.1.1">
+<PsychoPy2experiment encoding="utf-8" version="2024.2.2a1">
   <Settings>
+    <Param val="4" valType="str" updates="None" name="Audio latency priority"/>
     <Param val="ptb" valType="str" updates="None" name="Audio lib"/>
     <Param val="" valType="str" updates="None" name="Completed URL"/>
     <Param val="auto" valType="str" updates="None" name="Data file delimiter"/>
@@ -46,7 +47,6 @@
     <Param val="LEFT_EYE" valType="str" updates="None" name="elTrackEyes"/>
     <Param val="PUPIL_CR_TRACKING" valType="str" updates="None" name="elTrackingMode"/>
     <Param val="visual_oddball_2ob" valType="str" updates="None" name="expName"/>
-    <Param val="" valType="str" updates="None" name="expVersion"/>
     <Param val="on Sync" valType="str" updates="None" name="exportHTML"/>
     <Param val="None" valType="str" updates="None" name="eyetracker"/>
     <Param val="" valType="code" updates="None" name="frameRate"/>
@@ -61,14 +61,16 @@
     <Param val="0.5" valType="num" updates="None" name="mgSaccade"/>
     <Param val="neon.local" valType="str" updates="None" name="plCompanionAddress"/>
     <Param val="8080" valType="num" updates="None" name="plCompanionPort"/>
+    <Param val="True" valType="bool" updates="None" name="plCompanionRecordingEnabled"/>
     <Param val="0.6" valType="num" updates="None" name="plConfidenceThreshold"/>
+    <Param val="True" valType="bool" updates="None" name="plPupilCaptureRecordingEnabled"/>
     <Param val="" valType="str" updates="None" name="plPupilCaptureRecordingLocation"/>
     <Param val="127.0.0.1" valType="str" updates="None" name="plPupilRemoteAddress"/>
     <Param val="50020" valType="num" updates="None" name="plPupilRemotePort"/>
     <Param val="1000" valType="num" updates="None" name="plPupilRemoteTimeoutMs"/>
     <Param val="False" valType="bool" updates="None" name="plPupillometryOnly"/>
     <Param val="psychopy_iohub_surface" valType="str" updates="None" name="plSurfaceName"/>
-    <Param val="0" valType="code" updates="None" name="runMode"/>
+    <Param val="1" valType="code" updates="None" name="runMode"/>
     <Param val="False" valType="bool" updates="None" name="rush"/>
     <Param val="time" valType="str" updates="None" name="sortColumns"/>
     <Param val="" valType="str" updates="None" name="tbLicenseFile"/>
@@ -125,6 +127,7 @@
       <KeyboardComponent name="key_welcome" plugin="None">
         <Param val="'3', '4', '5', '6'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -142,14 +145,14 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
       <SoundComponent name="read_welcome" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="read_welcome" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="resource/welcome.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.8" valType="code" updates="None" name="startVal"/>
@@ -157,7 +160,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
     </Routine>
@@ -232,7 +234,7 @@
       <CodeComponent name="condition_setup" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="import numpy as np&amp;#10;&amp;#10;# --- Stimulus definitions ---&amp;#10;# (shape, size, type) for each stimulus category&amp;#10;STIMULI = {&amp;#10;    &quot;regular&quot;:   {&quot;edge&quot;: 360, &quot;size&quot;: 0.4, &quot;text&quot;: &quot;small circle&quot;},&amp;#10;    &quot;oddball&quot;:    {&quot;edge&quot;: 360, &quot;size&quot;: 0.6, &quot;text&quot;: &quot;big circle&quot;},&amp;#10;    &quot;distractor&quot;: {&quot;edge&quot;: 4,   &quot;size&quot;: 0.6, &quot;text&quot;: &quot;rectangle&quot;},&amp;#10;}&amp;#10;&amp;#10;# --- Timing ---&amp;#10;STIMULUS_DURATION = 0.5&amp;#10;ITI_RANGE         = (1.5, 2.5)  # seconds&amp;#10;&amp;#10;# --- Trial counts ---&amp;#10;N_CHUNKS = 10   # chunks × 10 trials = 100 trials total&amp;#10;N_TRIALS = N_CHUNKS * 10  # 80 standard, 10 oddball, 10 distractor per experiment&amp;#10;&amp;#10;# --- Build trial sequence ---&amp;#10;# Each 10-trial chunk:&amp;#10;#   Position 0 : always standard (no oddball/distractor as first trial)&amp;#10;#   Positions 1–9 : 7× standard + 1× oddball + 1× distractor, shuffled together&amp;#10;&amp;#10;trial_edges = []&amp;#10;trial_sizes = []&amp;#10;trial_types = []&amp;#10;&amp;#10;for _ in range(N_CHUNKS):&amp;#10;    inner = (&amp;#10;        [(&quot;regular&quot;,   STIMULI[&quot;regular&quot;][&quot;edge&quot;],   STIMULI[&quot;regular&quot;][&quot;size&quot;])]   * 7&amp;#10;      + [(&quot;oddball&quot;,    STIMULI[&quot;oddball&quot;][&quot;edge&quot;],    STIMULI[&quot;oddball&quot;][&quot;size&quot;])]     * 1&amp;#10;      + [(&quot;distractor&quot;, STIMULI[&quot;distractor&quot;][&quot;edge&quot;], STIMULI[&quot;distractor&quot;][&quot;size&quot;])] * 1&amp;#10;    )&amp;#10;    np.random.shuffle(inner)  # shuffles all three fields together — sizes stay aligned&amp;#10;&amp;#10;    chunk = [(&quot;regular&quot;, STIMULI[&quot;regular&quot;][&quot;edge&quot;], STIMULI[&quot;regular&quot;][&quot;size&quot;])] + inner&amp;#10;&amp;#10;    types, edges, sizes = zip(*chunk)&amp;#10;    trial_types  += list(types)&amp;#10;    trial_edges  += list(edges)&amp;#10;    trial_sizes  += list(sizes)&amp;#10;&amp;#10;# --- Verification ---&amp;#10;assert len(trial_types) == N_TRIALS&amp;#10;assert trial_types.count(&quot;regular&quot;)   == 80&amp;#10;assert trial_types.count(&quot;oddball&quot;)    == 10&amp;#10;assert trial_types.count(&quot;distractor&quot;) == 10&amp;#10;&amp;#10;# --- ITI list (includes stimulus duration as onset offset) ---&amp;#10;iti_list = list(&amp;#10;    ITI_RANGE[0]&amp;#10;    + np.random.random(N_TRIALS) * (ITI_RANGE[1] - ITI_RANGE[0])&amp;#10;    + STIMULUS_DURATION&amp;#10;)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="import numpy as np&amp;#10;&amp;#10;# --- Stimulus definitions ---&amp;#10;# (shape, size, type) for each stimulus category&amp;#10;STIMULI = {&amp;#10;    &quot;regular&quot;:   {&quot;edge&quot;: 360, &quot;size&quot;: 0.3, &quot;text&quot;: &quot;small circle&quot;},&amp;#10;    &quot;oddball&quot;:    {&quot;edge&quot;: 360, &quot;size&quot;: 0.5, &quot;text&quot;: &quot;big circle&quot;},&amp;#10;    &quot;distractor&quot;: {&quot;edge&quot;: 4,   &quot;size&quot;: 0.6, &quot;text&quot;: &quot;rectangle&quot;},&amp;#10;}&amp;#10;&amp;#10;# --- Timing ---&amp;#10;STIMULUS_DURATION = 0.5&amp;#10;ITI_RANGE         = (1.5, 2.5)  # seconds&amp;#10;&amp;#10;# --- Trial counts ---&amp;#10;N_CHUNKS = 20  # chunks × 10 trials = 200 trials total&amp;#10;N_TRIALS = N_CHUNKS * 10  # 160 standard, 20 oddball, 20 distractor per experiment&amp;#10;&amp;#10;# --- Build trial sequence ---&amp;#10;# Each 10-trial chunk:&amp;#10;#   Position 0 : always standard (no oddball/distractor as first trial)&amp;#10;#   Positions 1–9 : 7× standard + 1× oddball + 1× distractor, shuffled together&amp;#10;&amp;#10;trial_edges = []&amp;#10;trial_sizes = []&amp;#10;trial_types = []&amp;#10;&amp;#10;for _ in range(N_CHUNKS):&amp;#10;    inner = (&amp;#10;        [(&quot;regular&quot;,   STIMULI[&quot;regular&quot;][&quot;edge&quot;],   STIMULI[&quot;regular&quot;][&quot;size&quot;])]   * 7&amp;#10;      + [(&quot;oddball&quot;,    STIMULI[&quot;oddball&quot;][&quot;edge&quot;],    STIMULI[&quot;oddball&quot;][&quot;size&quot;])]     * 1&amp;#10;      + [(&quot;distractor&quot;, STIMULI[&quot;distractor&quot;][&quot;edge&quot;], STIMULI[&quot;distractor&quot;][&quot;size&quot;])] * 1&amp;#10;    )&amp;#10;    np.random.shuffle(inner)  # shuffles all three fields together — sizes stay aligned&amp;#10;&amp;#10;    chunk = [(&quot;regular&quot;, STIMULI[&quot;regular&quot;][&quot;edge&quot;], STIMULI[&quot;regular&quot;][&quot;size&quot;])] + inner&amp;#10;&amp;#10;    types, edges, sizes = zip(*chunk)&amp;#10;    trial_types  += list(types)&amp;#10;    trial_edges  += list(edges)&amp;#10;    trial_sizes  += list(sizes)&amp;#10;&amp;#10;# --- Verification ---&amp;#10;assert len(trial_types) == N_TRIALS&amp;#10;assert trial_types.count(&quot;regular&quot;)    == 160&amp;#10;assert trial_types.count(&quot;oddball&quot;)    == 20&amp;#10;assert trial_types.count(&quot;distractor&quot;) == 20&amp;#10;&amp;#10;# --- ITI list (includes stimulus duration as onset offset) ---&amp;#10;iti_list = list(&amp;#10;    ITI_RANGE[0]&amp;#10;    + np.random.random(N_TRIALS) * (ITI_RANGE[1] - ITI_RANGE[0])&amp;#10;    + STIMULUS_DURATION&amp;#10;)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
@@ -270,7 +272,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# Pop the next trial's properties from the lists&amp;#10;iti          = iti_list.pop(0)&amp;#10;shape_edges  = trial_edges.pop(0)&amp;#10;shape_size   = trial_sizes.pop(0)&amp;#10;trial_type   = trial_types.pop(0)&amp;#10;&amp;#10;# Derive oddball/distractor flags from trial_type&amp;#10;shape_is_oddball    = trial_type == &quot;oddball&quot;&amp;#10;shape_is_distractor = trial_type == &quot;distractor&quot;&amp;#10;&amp;#10;# Log to data table&amp;#10;thisExp.addData('trial_type',          trial_type)&amp;#10;thisExp.addData('shape_is_oddball',    shape_is_oddball)&amp;#10;thisExp.addData('shape_is_distractor', shape_is_distractor)&amp;#10;thisExp.addData('iti',                 iti - STIMULUS_DURATION)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="# Pop the next trial's properties from the lists&amp;#10;iti          = iti_list.pop(0)&amp;#10;shape_edges  = trial_edges.pop(0)&amp;#10;shape_size   = trial_sizes.pop(0)&amp;#10;trial_type   = trial_types.pop(0)&amp;#10;&amp;#10;# Derive oddball/distractor flags from trial_type&amp;#10;shape_is_oddball    = trial_type == &quot;oddball&quot;&amp;#10;shape_is_distractor = trial_type == &quot;distractor&quot;&amp;#10;&amp;#10;# Log to data table&amp;#10;thisExp.addData('trial_type',          trial_type)&amp;#10;thisExp.addData('shape_is_oddball',    shape_is_oddball)&amp;#10;thisExp.addData('shape_is_distractor', shape_is_distractor)&amp;#10;thisExp.addData('iti',                 iti - STIMULUS_DURATION)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -310,6 +312,33 @@
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="" valType="list" updates="constant" name="vertices"/>
       </PolygonComponent>
+      <TextComponent name="text_fixation_cross" plugin="None">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="False" valType="code" updates="constant" name="draggable"/>
+        <Param val="2.5" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Arial" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.1" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text_fixation_cross" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="$iti" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="+" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="code" updates="None" name="validator"/>
+        <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
       <CodeComponent name="trigger_tone" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
@@ -318,7 +347,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="pulse_started = False&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
-        <Param val="if stimulus_shape.status == STARTED and not pulse_started:&amp;#10;    if shape_is_oddball:&amp;#10;        dev.activate_line(bitmask=oddball_p300_code)&amp;#10;    elif shape_is_distractor:&amp;#10;        dev.activate_line(bitmask=distractor_p300_code)&amp;#10;    else:&amp;#10;        dev.activate_line(bitmask=regular_p300_code)&amp;#10;&amp;#10;    pulse_started = True" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if stimulus_shape.status == STARTED and not pulse_started:&amp;#10;    if shape_is_oddball:&amp;#10;        dev.activate_line(bitmask=oddball_p300_code)&amp;#10;    elif shape_is_distractor:&amp;#10;        dev.activate_line(bitmask=distractor_p300_code)&amp;#10;    else:&amp;#10;        dev.activate_line(bitmask=regular_p300_code)&amp;#10;&amp;#10;    pulse_started = True&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
@@ -330,9 +359,10 @@
       <KeyboardComponent name="shape_resp" plugin="None">
         <Param val="'1'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
-        <Param val="2.2" valType="code" updates="None" name="durationEstim"/>
+        <Param val="2.5" valType="code" updates="None" name="durationEstim"/>
         <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="shape_resp" valType="code" updates="None" name="name"/>
         <Param val="press" valType="str" updates="constant" name="registerOn"/>
@@ -386,7 +416,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$&quot;INSTRUCTIONS: Now we will see all the three shapes again.\n \nPay attention and decide which shape you need to respond to:\n \nis it the &quot; + STIMULI['oddball']['text'] + &quot;, the &quot; + STIMULI['regular']['text'] + &quot;, or the &quot; + STIMULI['distractor']['text'] + &quot;?\n \nPress any of the white keys to see the three shapes together.&quot;" valType="str" updates="constant" name="text"/>
+        <Param val="$&quot;INSTRUCTIONS: Now we will see all the three shapes again.\n \nPay attention and decide which shape you need to respond to:\n \nis it the &quot; + STIMULI['oddball']['text'] + &quot;, the &quot; + STIMULI['regular']['text'] + &quot;, or the &quot; + STIMULI['distractor']['text'] + &quot;?\n \nPress any of the white keys to see the three shapes together.&quot;" valType="str" updates="set every repeat" name="text"/>
         <Param val="norm" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
@@ -394,6 +424,7 @@
       <KeyboardComponent name="key_instruct_combined" plugin="None">
         <Param val="'3', '4', '5', '6'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -411,14 +442,14 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
       <SoundComponent name="read_instruct_combined" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="read_instruct_combined" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="resource/instruct_combined.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.8" valType="code" updates="None" name="startVal"/>
@@ -426,7 +457,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
     </Routine>
@@ -469,7 +499,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$&quot;INSTRUCTIONS: \n \n In this task you will see a series of shapes. \n \n There are three different shapes. Every time you see the following shape, a &quot;+ STIMULI[&quot;oddball&quot;][&quot;text&quot;]+ &quot;, respond by pressing the Green key.\n \nNow press any of the white keys to see the shape.&quot;" valType="str" updates="constant" name="text"/>
+        <Param val="$&quot;INSTRUCTIONS: \n \n In this task you will see a series of shapes. \n \n There are three different shapes. Every time you see the following shape, a &quot;+ STIMULI[&quot;oddball&quot;][&quot;text&quot;]+ &quot;, respond by pressing the Green key.\n \nNow press any of the white keys to see the shape.&quot;" valType="str" updates="set every repeat" name="text"/>
         <Param val="norm" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
@@ -477,6 +507,7 @@
       <KeyboardComponent name="key_instruct_oddball" plugin="None">
         <Param val="'3', '4', '5', '6'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -494,14 +525,14 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
       <SoundComponent name="read_instruct_oddball" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="read_instruct_oddball" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="resource/instruct_oddball.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.8" valType="code" updates="None" name="startVal"/>
@@ -509,7 +540,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
     </Routine>
@@ -552,7 +582,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$&quot;Would you respond to the &quot; + STIMULI['oddball']['text'] + &quot;, the &quot; + STIMULI['regular']['text'] + &quot;, or the &quot; + STIMULI['distractor']['text'] + &quot;? \n \nPlease tell the examiner verbally. You can also ask to see the shapes again if you are not sure.&quot;" valType="str" updates="constant" name="text"/>
+        <Param val="$&quot;Would you respond to the &quot; + STIMULI['oddball']['text'] + &quot;, the &quot; + STIMULI['regular']['text'] + &quot;, or the &quot; + STIMULI['distractor']['text'] + &quot;? \n \nPlease tell the examiner verbally. You can also ask to see the shapes again if you are not sure.&quot;" valType="str" updates="set every repeat" name="text"/>
         <Param val="norm" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
@@ -560,6 +590,7 @@
       <KeyboardComponent name="key_instruct_verify" plugin="None">
         <Param val="'r', 'o'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -577,14 +608,14 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
       <SoundComponent name="read_instruct_verify" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="read_instruct_verify" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="resource/instruct_verify.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.8" valType="code" updates="None" name="startVal"/>
@@ -592,7 +623,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
       <CodeComponent name="code_instruct_verify" plugin="None">
@@ -611,87 +641,6 @@
         <Param val="if key_instruct_verify.keys == 'o':  # proceed to main experiment&amp;#10;    practice_loop.finished = True&amp;#10;" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_instruct_verify" valType="code" updates="None" name="name"/>
-      </CodeComponent>
-    </Routine>
-    <Routine name="close_eyes">
-      <RoutineSettingsComponent name="close_eyes" plugin="None">
-        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
-        <Param val="" valType="str" updates="None" name="backgroundImg"/>
-        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
-        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
-        <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="code" updates="None" name="forceNonSlip"/>
-        <Param val="close_eyes" valType="code" updates="None" name="name"/>
-        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="constant" name="skipIf"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
-        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
-      </RoutineSettingsComponent>
-      <TextComponent name="text_close_eyes" plugin="None">
-        <Param val="white" valType="color" updates="constant" name="color"/>
-        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
-        <Param val="1" valType="num" updates="constant" name="contrast"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="False" valType="code" updates="constant" name="draggable"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="None" valType="str" updates="constant" name="flip"/>
-        <Param val="Arial" valType="str" updates="constant" name="font"/>
-        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.1" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="text_close_eyes" valType="code" updates="None" name="name"/>
-        <Param val="" valType="num" updates="constant" name="opacity"/>
-        <Param val="0" valType="num" updates="constant" name="ori"/>
-        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
-        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="2.0" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Please close your eyes..." valType="str" updates="constant" name="text"/>
-        <Param val="norm" valType="str" updates="None" name="units"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
-      </TextComponent>
-      <SoundComponent name="read_close_eyes" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="True" valType="bool" updates="constant" name="hamming"/>
-        <Param val="read_close_eyes" valType="code" updates="None" name="name"/>
-        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="resource/close_eyes.wav" valType="str" updates="set every repeat" name="sound"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.2" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1.6" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
-        <Param val="1" valType="num" updates="constant" name="volume"/>
-      </SoundComponent>
-      <CodeComponent name="trigger_trial_block" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# Beginning of main experiment trial block&amp;#10;dev.activate_line(bitmask=block_start_code)&amp;#10;eyetracker.sendMessage(block_start_code)&amp;#10;# no need to wait 500ms because this routine lasts 2.0s before trial triggers&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Py" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
-        <Param val="trigger_trial_block" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
     <Routine name="instruct_begin">
@@ -733,7 +682,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$&quot;INSTRUCTIONS:\n \nRemember to press the Green key every time you see the &quot; + STIMULI['oddball']['text'] + &quot;, and otherwise do not respond. Please try to respond as quickly and accurately as possible.\n \nPress the green key to begin the task.&quot;" valType="str" updates="constant" name="text"/>
+        <Param val="$&quot;INSTRUCTIONS:\n \nRemember to press the Green key every time you see the &quot; + STIMULI['oddball']['text'] + &quot;, and otherwise do not respond. Please try to respond as quickly and accurately as possible.\n \nPress the green key to begin the task.&quot;" valType="str" updates="set every repeat" name="text"/>
         <Param val="norm" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
@@ -741,6 +690,7 @@
       <KeyboardComponent name="key_instruct_begin" plugin="None">
         <Param val="'1'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -758,14 +708,14 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
       <SoundComponent name="read_instruct_begin" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="read_instruct_begin" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="resource/instruct_begin.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.8" valType="code" updates="None" name="startVal"/>
@@ -773,16 +723,15 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
-      <CodeComponent name="trigger_trial_block_2" plugin="None">
+      <CodeComponent name="trigger_trial_block" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# Beginning of main experiment trial block&amp;#10;dev.activate_line(bitmask=block_start_code)&amp;#10;# no need to wait 500ms because this routine lasts 2.0s before trial triggers" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="# Beginning of main experiment trial block&amp;#10;dev.activate_line(bitmask=block_start_code)&amp;#10;# no need to wait 500ms because this routine lasts 2.0s before trial triggers&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -791,7 +740,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="trigger_trial_block_2" valType="code" updates="None" name="name"/>
+        <Param val="trigger_trial_block" valType="code" updates="None" name="name"/>
       </CodeComponent>
     </Routine>
     <Routine name="__end__">
@@ -839,14 +788,14 @@
         <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
       <SoundComponent name="read_thank_you" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="read_thank_you" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="resource/thank_you.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.2" valType="code" updates="None" name="startVal"/>
@@ -854,7 +803,6 @@
         <Param val="2.7" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="False" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
       <CodeComponent name="trigger_trial_block_end" plugin="None">
@@ -988,7 +936,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$&quot;INSTRUCTIONS:\n \n Every time you see the following shape, a &quot; + STIMULI[&quot;regular&quot;][&quot;text&quot;] + &quot;, don't press any key. \n \n You do not need to make any response. \n \n Now press any of the white keys to see the shape.&quot;" valType="str" updates="constant" name="text"/>
+        <Param val="$&quot;INSTRUCTIONS:\n \n Every time you see the following shape, a &quot; + STIMULI[&quot;regular&quot;][&quot;text&quot;] + &quot;, don't press any key. \n \n You do not need to make any response. \n \n Now press any of the white keys to see the shape.&quot;" valType="str" updates="set every repeat" name="text"/>
         <Param val="norm" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
@@ -996,6 +944,7 @@
       <KeyboardComponent name="key_instruct_regular" plugin="None">
         <Param val="'3', '4', '5', '6'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -1013,14 +962,14 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
       <SoundComponent name="read_instruct_regular" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="read_instruct_regular" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="resource/instruct_regular.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.8" valType="code" updates="None" name="startVal"/>
@@ -1028,7 +977,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
     </Routine>
@@ -1145,7 +1093,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$&quot;INSTRUCTIONS:\n \n Every time you see the following shape, a &quot; + STIMULI[&quot;distractor&quot;][&quot;text&quot;] + &quot;, don't press any key. \n \n You do not need to make any response. \n \n Now press any of the white keys to see the shape.&quot;" valType="str" updates="constant" name="text"/>
+        <Param val="$&quot;INSTRUCTIONS:\n \n Every time you see the following shape, a &quot; + STIMULI[&quot;distractor&quot;][&quot;text&quot;] + &quot;, don't press any key. \n \n You do not need to make any response. \n \n Now press any of the white keys to see the shape.&quot;" valType="str" updates="set every repeat" name="text"/>
         <Param val="norm" valType="str" updates="None" name="units"/>
         <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1.8" valType="num" updates="constant" name="wrapWidth"/>
@@ -1153,6 +1101,7 @@
       <KeyboardComponent name="key_instruct_distractor" plugin="None">
         <Param val="'3', '4', '5', '6'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
@@ -1170,14 +1119,14 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
       <SoundComponent name="read_instruct_distractor" plugin="None">
-        <Param val="" valType="device" updates="None" name="deviceLabel"/>
+        <Param val="" valType="str" updates="None" name="deviceLabel"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
-        <Param val="False" valType="bool" updates="constant" name="forceEndRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="read_instruct_distractor" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="resource/instruct_distractor.wav" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.8" valType="code" updates="None" name="startVal"/>
@@ -1185,7 +1134,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="" valType="code" updates="None" name="validator"/>
         <Param val="1" valType="num" updates="constant" name="volume"/>
       </SoundComponent>
     </Routine>
@@ -1313,7 +1261,7 @@
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="False" valType="code" updates="constant" name="draggable"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="0.5" valType="code" updates="None" name="durationEstim"/>
         <Param val="white" valType="color" updates="constant" name="fillColor"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
@@ -1342,7 +1290,7 @@
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="False" valType="code" updates="constant" name="draggable"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="0.5" valType="code" updates="None" name="durationEstim"/>
         <Param val="white" valType="color" updates="constant" name="fillColor"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
@@ -1371,7 +1319,7 @@
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="False" valType="code" updates="constant" name="draggable"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="0.5" valType="code" updates="None" name="durationEstim"/>
         <Param val="white" valType="color" updates="constant" name="fillColor"/>
         <Param val="linear" valType="str" updates="constant" name="interpolate"/>
         <Param val="white" valType="color" updates="constant" name="lineColor"/>
