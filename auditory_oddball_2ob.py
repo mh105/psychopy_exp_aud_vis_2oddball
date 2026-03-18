@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.2a1),
-    on Tue Mar 17 13:53:15 2026
+    on Wed Mar 18 14:07:07 2026
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -3177,7 +3177,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # Run 'Begin Routine' code from trigger_trial_block_end
     # End of main experiment trial block
     dev.activate_line(bitmask=block_end_code)
-    eyetracker.sendMessage(block_end_code)
     # no need to wait 500ms as this routine lasts 3.0s before experiment ends
     
     # store start times for __end__

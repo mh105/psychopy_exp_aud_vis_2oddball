@@ -1,7 +1,8 @@
 # Auditory and visual oddball tasks (no pupil)
-Last edit: 03/17/2026
+Last edit: 03/18/2026
 
 ## Edit history
+- 03/18/2026 by Alex He - remove a reminant eyetracker.sendMessage() call that is throwing an error
 - 03/17/2026 by Jenny Tou and Alex He - initial draft of separate auditory and visual double oddball tasks without pillometry
 
 ## Description
