@@ -234,7 +234,7 @@
       <CodeComponent name="condition_setup" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="import numpy as np&amp;#10;&amp;#10;# --- Stimulus definitions ---&amp;#10;# (frequency, type) for each stimulus category&amp;#10;regular_frequency = 880&amp;#10;oddball_frequency = 440&amp;#10;distractor_frequency = 1150&amp;#10;&amp;#10;STIMULI = {&amp;#10;    &quot;regular&quot;:   {&quot;frequency&quot;: regular_frequency, &quot;text&quot;: &quot;second tone&quot;},&amp;#10;    &quot;oddball&quot;:    {&quot;frequency&quot;: oddball_frequency, &quot;text&quot;: &quot;first tone&quot;},&amp;#10;    &quot;distractor&quot;: {&quot;frequency&quot;: distractor_frequency, &quot;text&quot;: &quot;third tone&quot;},&amp;#10;}&amp;#10;&amp;#10;# --- Timing ---&amp;#10;STIMULUS_DURATION = 0.2&amp;#10;ITI_RANGE         = (1.5, 2.5)  # seconds&amp;#10;&amp;#10;# --- Trial counts ---&amp;#10;N_CHUNKS = 20  # chunks × 10 trials = 200 trials total&amp;#10;N_TRIALS = N_CHUNKS * 10  # 160 standard, 20 oddball, 20 distractor per experiment&amp;#10;&amp;#10;# --- Build trial sequence ---&amp;#10;# Each 10-trial chunk:&amp;#10;#   Position 0 : always standard (no oddball/distractor as first trial)&amp;#10;#   Positions 1–9 : 7× standard + 1× oddball + 1× distractor, shuffled together&amp;#10;&amp;#10;trial_frequencies = []&amp;#10;trial_types = []&amp;#10;&amp;#10;for _ in range(N_CHUNKS):&amp;#10;    inner = (&amp;#10;        [(&quot;regular&quot;,   STIMULI[&quot;regular&quot;][&quot;frequency&quot;])]   * 7&amp;#10;      + [(&quot;oddball&quot;,    STIMULI[&quot;oddball&quot;][&quot;frequency&quot;])]     * 1&amp;#10;      + [(&quot;distractor&quot;, STIMULI[&quot;distractor&quot;][&quot;frequency&quot;])] * 1&amp;#10;    )&amp;#10;    np.random.shuffle(inner)&amp;#10;&amp;#10;    chunk = [(&quot;regular&quot;, STIMULI[&quot;regular&quot;][&quot;frequency&quot;])] + inner&amp;#10;&amp;#10;    types, freqs = zip(*chunk)&amp;#10;    trial_types       += list(types)&amp;#10;    trial_frequencies += list(freqs)&amp;#10;&amp;#10;# --- Verification ---&amp;#10;assert len(trial_types) == N_TRIALS&amp;#10;assert trial_types.count(&quot;regular&quot;)    == 160&amp;#10;assert trial_types.count(&quot;oddball&quot;)    == 20&amp;#10;assert trial_types.count(&quot;distractor&quot;) == 20&amp;#10;&amp;#10;# --- ITI list (includes stimulus duration as onset offset) ---&amp;#10;iti_list = list(&amp;#10;    ITI_RANGE[0]&amp;#10;    + np.random.random(N_TRIALS) * (ITI_RANGE[1] - ITI_RANGE[0])&amp;#10;    + STIMULUS_DURATION&amp;#10;)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="import numpy as np&amp;#10;&amp;#10;# --- Stimulus definitions ---&amp;#10;# (frequency, type) for each stimulus category&amp;#10;regular_frequency = '493.88'&amp;#10;oddball_frequency = '440'&amp;#10;distractor_frequency = '1100'&amp;#10;&amp;#10;STIMULI = {&amp;#10;    &quot;regular&quot;:   {&quot;frequency&quot;: regular_frequency, &quot;text&quot;: &quot;second tone&quot;},&amp;#10;    &quot;oddball&quot;:    {&quot;frequency&quot;: oddball_frequency, &quot;text&quot;: &quot;first tone&quot;},&amp;#10;    &quot;distractor&quot;: {&quot;frequency&quot;: distractor_frequency, &quot;text&quot;: &quot;third tone&quot;},&amp;#10;}&amp;#10;&amp;#10;# --- Timing ---&amp;#10;STIMULUS_DURATION = 0.2&amp;#10;ITI_RANGE         = (1.5, 2.5)  # seconds&amp;#10;&amp;#10;# --- Trial counts ---&amp;#10;N_CHUNKS = 20  # chunks × 10 trials = 200 trials total&amp;#10;N_TRIALS = N_CHUNKS * 10  # 160 standard, 20 oddball, 20 distractor per experiment&amp;#10;&amp;#10;# --- Build trial sequence ---&amp;#10;# Each 10-trial chunk:&amp;#10;#   Position 0 : always standard (no oddball/distractor as first trial)&amp;#10;#   Positions 1–9 : 7× standard + 1× oddball + 1× distractor, shuffled together&amp;#10;&amp;#10;trial_frequencies = []&amp;#10;trial_types = []&amp;#10;&amp;#10;for _ in range(N_CHUNKS):&amp;#10;    inner = (&amp;#10;        [(&quot;regular&quot;,   STIMULI[&quot;regular&quot;][&quot;frequency&quot;])]   * 7&amp;#10;      + [(&quot;oddball&quot;,    STIMULI[&quot;oddball&quot;][&quot;frequency&quot;])]     * 1&amp;#10;      + [(&quot;distractor&quot;, STIMULI[&quot;distractor&quot;][&quot;frequency&quot;])] * 1&amp;#10;    )&amp;#10;    np.random.shuffle(inner)&amp;#10;&amp;#10;    chunk = [(&quot;regular&quot;, STIMULI[&quot;regular&quot;][&quot;frequency&quot;])] + inner&amp;#10;&amp;#10;    types, freqs = zip(*chunk)&amp;#10;    trial_types       += list(types)&amp;#10;    trial_frequencies += list(freqs)&amp;#10;&amp;#10;# --- Verification ---&amp;#10;assert len(trial_types) == N_TRIALS&amp;#10;assert trial_types.count(&quot;regular&quot;)    == 160&amp;#10;assert trial_types.count(&quot;oddball&quot;)    == 20&amp;#10;assert trial_types.count(&quot;distractor&quot;) == 20&amp;#10;&amp;#10;# --- ITI list (includes stimulus duration as onset offset) ---&amp;#10;iti_list = list(&amp;#10;    ITI_RANGE[0]&amp;#10;    + np.random.random(N_TRIALS) * (ITI_RANGE[1] - ITI_RANGE[0])&amp;#10;    + STIMULUS_DURATION&amp;#10;)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
@@ -290,7 +290,7 @@
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="sound_tone" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$tone_frequency" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="$'resource/'+ tone_frequency + 'Hz.wav'" valType="str" updates="set every repeat" name="sound"/>
         <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -899,7 +899,7 @@
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="sound_oddball" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$oddball_frequency" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="$'resource/'+ oddball_frequency + 'Hz.wav'" valType="str" updates="set every repeat" name="sound"/>
         <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -1045,7 +1045,7 @@
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="sound_regular" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$regular_frequency" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="$'resource/'+ regular_frequency + 'Hz.wav'" valType="str" updates="set every repeat" name="sound"/>
         <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -1191,7 +1191,7 @@
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="sound_distractor" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$distractor_frequency" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="$'resource/'+ distractor_frequency + 'Hz.wav'" valType="str" updates="set every repeat" name="sound"/>
         <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -1254,7 +1254,7 @@
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="sound_oddball_combined" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$oddball_frequency" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="$'resource/'+ oddball_frequency + 'Hz.wav'" valType="str" updates="set every repeat" name="sound"/>
         <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -1272,7 +1272,7 @@
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="sound_regular_combined" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$regular_frequency" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="$'resource/'+ regular_frequency + 'Hz.wav'" valType="str" updates="set every repeat" name="sound"/>
         <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
@@ -1290,7 +1290,7 @@
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
         <Param val="sound_distractor_combined" valType="code" updates="None" name="name"/>
         <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="$distractor_frequency" valType="str" updates="set every repeat" name="sound"/>
+        <Param val="$'resource/'+ distractor_frequency + 'Hz.wav'" valType="str" updates="set every repeat" name="sound"/>
         <Param val="-1" valType="code" updates="None" name="speakerIndex"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
